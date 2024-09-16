@@ -3,26 +3,25 @@ import wave
 from client_sbv2 import init_abv2_api, call_TTS_API
 import datetime
 
+API_KEY = "sbv2_amitaro"
+#API_KEY = "sbv2_jvnv-F1-jp"
+
 class TextToSpeechSBV2:
     def __init__(self, folder="wav_folder"):
         self.folder = folder
         init_abv2_api(api_key = "sbv2_amitaro", model_name = "amitaro")
         init_abv2_api(api_key = "sbv2_jvnv-F1-jp", model_name = "jvnv-F1-jp")
-
-        self.text_to_speech_to_file("おはよう！")
-
+        #self.text_to_speech_to_file("おはよう！")
 
 
     def text_to_speech_to_file(self, text, filename=None):
         if filename is None:
             current_time = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
             filename = self.folder + "/" + current_time + ".wav"
-        audio, sr = call_TTS_API(text, api_key = "sbv2_amitaro")
+        audio, sr = call_TTS_API(text, api_key = API_KEY)
 
-
-        print(f"DEBUG: client  {type(audio)=} ")
-        print(f"DEBUG: client  {audio[0:10]=} ")
-
+        #print(f"DEBUG: client  {type(audio)=} ")
+        #print(f"DEBUG: client  {audio[0:10]=} ")
 
         save_to_wav(sr, audio, filename=filename)
         print(f"DEBUG: {filename=} text={text}")

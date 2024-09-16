@@ -1,6 +1,10 @@
 import os
 from openai import OpenAI
 
+#MODEL_NAME = "gpt-3.5-turbo"
+MODEL_NAME = "gpt-4o-mini"
+
+
 class ChatGPTDialogue:
     def __init__(self, callback):
         self.client = self._setup_openai_client()
@@ -40,7 +44,7 @@ class ChatGPTDialogue:
 
     def _create_chat_completion(self):
         response = self.client.chat.completions.create(
-            model="gpt-3.5-turbo",
+            model=MODEL_NAME,
             messages=self.messages
         )
         return response.choices[0].message.content

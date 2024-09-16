@@ -2,11 +2,14 @@
 from abstract_call_manager import AbstractCallManager
 import requests
 import threading
+import queue
 
 class HTTPCallManager(AbstractCallManager):
     def __init__(self, server_url):
         self.server_url = server_url  # communication_server.py の URL
         self.call_active = False
+        self.audio_queue = queue.Queue()
+        self.input_queue = queue.Queue()
 
     def initiate_call(self):
         self.call_active = True
