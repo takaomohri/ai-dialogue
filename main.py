@@ -53,6 +53,7 @@ def voice():
     ai_response = chat_handler.send_message("もしもし")
     if ai_response:
         audio_filename = tts_manager.convert_text_to_speech(ai_response)
+        print(f"DEBUG: ai_response: {ai_response}")
         audio_url = url_for('serve_audio', filename=audio_filename, _external=True)
         if isinstance(call_manager, TwilioCallManager):
             call_manager.play_audio(response, audio_url)

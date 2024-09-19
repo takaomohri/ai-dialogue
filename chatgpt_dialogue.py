@@ -10,7 +10,7 @@ class ChatGPTDialogue:
         self.client = self._setup_openai_client()
         self.messages = []
         self.callback = callback
-        self.initial_prompt = self._load_initial_prompt()
+        #self.initial_prompt = self._load_initial_prompt()
 
     def _setup_openai_client(self):
         api_key = os.getenv("OPENAI_API_KEY")
@@ -21,12 +21,15 @@ class ChatGPTDialogue:
     def _load_initial_prompt(self):
         try:
             with open("prompt.txt", "r", encoding="utf-8") as file:
+                print("DEBUG: prompt.txt ファイルを読み込みます。")
                 return file.read().strip()
         except FileNotFoundError:
             print("警告: prompt.txt ファイルが見つかりません。デフォルトのプロンプトを使用します。")
             return "あなたは役立つアシスタントです。"
 
     def open_chat(self):
+        # 毎回読み直すようにした。
+        self.initial_prompt = self._load_initial_prompt()
         self.messages = [{"role": "system", "content": self.initial_prompt}]
         #print("チャットを初期化しました。初期プロンプト:")
         #print(self.initial_prompt)
