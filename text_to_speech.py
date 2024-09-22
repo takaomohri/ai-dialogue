@@ -24,7 +24,7 @@ class TextToSpeechSBV2:
         #print(f"DEBUG: client  {audio[0:10]=} ")
 
         save_to_wav(sr, audio, filename=filename)
-        print(f"DEBUG: {filename=} text={text}")
+        #print(f"DEBUG: {filename=} text={text}")
         return filename
 
 

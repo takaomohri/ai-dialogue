@@ -59,13 +59,13 @@ def voice():
 @app.route("/process_speech", methods=['POST'])
 def process_speech():
     user_speech = request.values.get('SpeechResult', '')
-    print(f"DEBUG: user_speech: {user_speech}")
+    print(f"DEBUG: {user_speech}")
 
     if not user_speech:
         return _handle_no_speech()
 
     ai_response = chat_handler.send_message(user_speech)
-    print(f"DEBUG: ai_response: {ai_response}")
+    print(f"DEBUG: {ai_response=}")
 
     response = call_manager.create_voice_response()
     audio_url = url_for('serve_audio', text=ai_response)
